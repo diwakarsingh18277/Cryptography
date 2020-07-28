@@ -1,38 +1,77 @@
 package cryptography;
+import java.util.Scanner;
 
 public class Main
 {
     //entry point into the application
     public static void main(String[] args)
     {
-        /*
-        String data = "This is a very important statement.";
-        String key = "How old is my computer?";
-        KeyGenerator kGen = new KeyGenerator(key);
-        String nK = kGen.getNumericKey();
-        ArmstrongManager aMgr = new ArmstrongManager(nK);
-        ColorManager cMgr = new ColorManager(nK);
-        String encData ="";
-        int temp;
-        int i;
-        for(i =0 ; i < data.length(); i++)
+        Scanner sc = new Scanner(System.in);
+        System.out.println("\n\n\t\t\t****** Cryptography *******\n");
+        int choice=0;
+        while(choice!=1 && choice!=2)
         {
-            temp = aMgr.encrypt(data.charAt(i));
-            temp = cMgr.encrypt(temp);
-            encData = encData  + (char)temp;
-        }
-        String decData= "";
-        for(i =0 ; i < encData.length(); i++)
-        {
-            temp = cMgr.decrypt(encData.charAt(i));
-            temp = aMgr.decrypt(temp);
-            decData = decData  + (char)temp;
-        }
-        System.out.println("data: "+ data + "  " + data.length());
-        System.out.println("enc data: "+ encData + "  " + encData.length());
-        System.out.println("dec data: "+ decData + "  " + decData.length());
-        */
+          System.out.println("\tEnter you choice : ");
+          System.out.println("\t1.String Encryption\n\t2.Image Encryption");
+          System.out.print("\t");
+          choice = sc.nextInt();
 
+          if(choice == 1 || choice == 2)
+            break;
+          else
+          {
+              System.out.println("\tInvalid Input");
+          }
+
+        }
+
+        if(choice==1)
+        {
+          // String data = "This is a very important statement.";
+          sc.nextLine();
+          System.out.println("\tEnter your data which you want to encrypt");
+          System.out.print("\t");
+          String data=sc.nextLine();
+          // System.out.println(data);
+          String key = "How old is my computer?";
+          KeyGenerator kGen = new KeyGenerator(key);
+          String nK = kGen.getNumericKey();
+          ArmstrongManager aMgr = new ArmstrongManager(nK);
+          ColorManager cMgr = new ColorManager(nK);
+          String encData ="";
+          int temp;
+          int i;
+          System.out.println("\n\tdata: "+ data + "  " + data.length());
+
+          for(i =0 ; i < data.length(); i++)
+          {
+              temp = aMgr.encrypt(data.charAt(i));
+              temp = cMgr.encrypt(temp);
+              encData = encData  + (char)temp;
+          }
+          System.out.println("\n\tenc data: "+ encData + "  " + encData.length());
+          int ch=2;
+          while(ch!=0 && ch!=1)
+          {
+            System.out.println("\n\tDo you want to decrypt ? \n\t1.Yes\n\t0.No");
+            System.out.print("\t");
+            ch=sc.nextInt();
+          }
+          if(ch==1)
+          {
+            String decData= "";
+            for(i =0 ; i < encData.length(); i++)
+            {
+                temp = cMgr.decrypt(encData.charAt(i));
+                temp = aMgr.decrypt(temp);
+                decData = decData  + (char)temp;
+            }
+
+            System.out.println("\n\tdec data: "+ decData + "  " + decData.length());
+          }
+      }
+      else
+      {
         try
         {
             //String src = "d:/a.txt";//images/kids.jpg";
@@ -54,11 +93,12 @@ public class Main
             System.out.println("Decryption Done");
 
 
-        }
-        catch(Exception ex)
-        {
-            System.out.println("Err: " +ex.getMessage());
-        }
+          }
+          catch(Exception ex)
+          {
+              System.out.println("Err: " +ex.getMessage());
+          }
+      }
     }
 
 }
